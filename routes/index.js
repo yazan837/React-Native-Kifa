@@ -1,11 +1,11 @@
-import { AuthStackScreen } from "./Auth";
-import { HomeStackScreen } from "./Home";
-import { createStackNavigator } from "@react-navigation/stack";
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {AuthStackScreen} from './Auth';
+import {HomeStackScreen} from './Home';
+import {createStackNavigator} from '@react-navigation/stack';
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 const RootStack = createStackNavigator();
 export const RootStackScreen = () => {
-  const AuthReducer = useSelector((state) => state.AuthReducer);
+  const AuthReducer = useSelector(state => state.AuthReducer);
   const [grantAccess, setGrantAcess] = useState(AuthReducer.isAuthenticated);
 
   useEffect(() => {
@@ -16,10 +16,9 @@ export const RootStackScreen = () => {
       headerMode="none"
       screenOptions={{
         header: () => null,
-      }}
-    >
+      }}>
       {(!grantAccess && AuthReducer.token === null) ||
-      (!grantAccess && typeof AuthReducer.token !== "undefined") ? (
+      (!grantAccess && typeof AuthReducer.token !== 'undefined') ? (
         // {!grantAccess ? (
         <RootStack.Screen
           name="Auth"
@@ -31,13 +30,11 @@ export const RootStackScreen = () => {
           name="App"
           component={HomeStackScreen}
           options={{
+            header: () => null,
             animationEnabled: true,
           }}
-          options={{
-            header: () => null,
-          }}
         />
-       )} 
+      )}
     </RootStack.Navigator>
   );
 };
